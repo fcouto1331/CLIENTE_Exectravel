@@ -1,7 +1,11 @@
+using C4PRESENTATION_WEB.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+InterfacesExtension.AddInterfaces(builder.Services);
 
 var app = builder.Build();
 

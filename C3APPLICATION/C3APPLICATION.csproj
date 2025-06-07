@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="FluentValidation\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Mapperly\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+    <PackageReference Include="Riok.Mapperly" Version="4.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\C1DOMAIN\C1DOMAIN.csproj" />
+    <ProjectReference Include="..\C2INFRA_EXCEL\C2INFRA_EXCEL.csproj" />
+    <ProjectReference Include="..\C2INFRA_SQL\C2INFRA_SQL.csproj" />
+  </ItemGroup>
+
+</Project>

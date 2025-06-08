@@ -12,8 +12,6 @@
             Ano = ano;
             PeriodoIni = periodoIni;
             PeriodoFim = periodoFim;
-            PeriodoIni = periodoIni; 
-            PeriodoFim = periodoFim;
             //TransacaoDados = transacaoDados;
         }
 

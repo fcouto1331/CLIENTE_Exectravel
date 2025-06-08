@@ -28,7 +28,7 @@ namespace C2INFRA_SQL.Repositories
             {
                 db.Open();
                 StringBuilder query = new StringBuilder();
-                query.Append(" SELECT t.Id, t.GuidId, t.TransacaoDataCadastro, t.TransacaoDataAtualizacao, t.Empresa_Id, t.Mes, t.Ano, t.periodoIni, t.periodoFim, e.Nome as EmpresaNome FROM Transacao as t");
+                query.Append(" SELECT t.Id, t.GuidId, t.TransacaoDataCadastro, t.TransacaoDataAtualizacao, t.Empresa_Id, t.Mes, t.Ano, t.PeriodoIni, t.PeriodoFim, e.Nome as EmpresaNome FROM Transacao as t");
                 query.Append(" inner join Empresa as e on e.Id = t.Empresa_Id");
                 return [.. db.Query<TransacaoCustomEntity>(query.ToString(), commandType: CommandType.Text)];
             }

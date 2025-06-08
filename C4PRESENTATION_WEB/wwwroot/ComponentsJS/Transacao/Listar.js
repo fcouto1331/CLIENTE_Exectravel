@@ -15,7 +15,7 @@
                 if (transacao && transacao.length > 0) {
                     let tabela = '';
                     tabela += `<table class="table table-bordered"><caption>Total: ${transacao.length}</caption>`;
-                    tabela += `<thead class="bg-dark text-white">
+                    tabela += `<thead class="bg-light text-dark">
                         <tr>
                             <th style="width:20%">Código</th>
                             <th style="width:20%">Empresa</th>

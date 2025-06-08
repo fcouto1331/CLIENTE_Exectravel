@@ -2,7 +2,7 @@
 using C3APPLICATION.DTOs;
 using Mapster;
 
-namespace C3APPLICATION.Mapperly
+namespace C3APPLICATION.Mapster
 {
     public class Mapper
     {

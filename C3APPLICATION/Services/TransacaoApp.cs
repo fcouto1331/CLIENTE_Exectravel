@@ -1,7 +1,7 @@
 ﻿using C1DOMAIN.Interfaces.IServices;
 using C3APPLICATION.DTOs;
 using C3APPLICATION.Interfaces;
-using C3APPLICATION.Mapperly;
+using C3APPLICATION.Mapster;
 
 namespace C3APPLICATION.Services
 {

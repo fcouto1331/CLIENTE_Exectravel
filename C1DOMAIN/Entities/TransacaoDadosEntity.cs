@@ -2,17 +2,19 @@
 {
     public class TransacaoDadosEntity : BaseEntity
     {
-        public TransacaoDadosEntity(int id, Guid guidId, DateTime transacaoDataCadastro, int transacao_Id, string cCusto, decimal totalCLiente)//, TransacaoEntity transacao)
+        public TransacaoDadosEntity(int id, Guid guidId, DateTime transacaoDataCadastro, DateTime transacaoDadosDataAtualizacao, int transacao_Id, string cCusto, decimal totalCLiente)//, TransacaoEntity transacao)
             : base(id, guidId) 
         {
             TransacaoDadosDataCadastro = transacaoDataCadastro;
             Transacao_Id = transacao_Id;
             CCusto = cCusto;
             TotalCliente = totalCLiente;
+            TransacaoDadosDataAtualizacao = transacaoDadosDataAtualizacao;
             //Transacao = transacao;
         }
 
         public DateTime TransacaoDadosDataCadastro { get; private set; }
+        public DateTime TransacaoDadosDataAtualizacao { get; private set; }
         public int Transacao_Id { get; private set; }
         public string CCusto { get; private set; }
         public decimal TotalCliente { get; private set; }

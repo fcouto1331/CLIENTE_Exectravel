@@ -1,4 +1,4 @@
-﻿namespace C1DOMAIN.Entities
+﻿namespace C3APPLICATION.DTOs
 {
     public class UsuarioDTO : BaseDTO
     {

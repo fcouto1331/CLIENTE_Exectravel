@@ -1,14 +1,15 @@
 ﻿using C1DOMAIN.Interfaces.IRepositories;
+using C3APPLICATION.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace C4PRESENTATION_WEB.Controllers
 {
     public class TransacaoController : Controller
     {
-        private readonly ITransacaoRepository _repository;
-        public TransacaoController(ITransacaoRepository repository)
+        private readonly ITransacaoApp _app;
+        public TransacaoController(ITransacaoApp app)
         {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _app = app ?? throw new ArgumentNullException(nameof(app));
         }
 
         [HttpGet]
@@ -16,7 +17,7 @@ namespace C4PRESENTATION_WEB.Controllers
         {
             try
             {
-                _repository.ListarCustom();
+                var transacao = _app.ListarCustom();
                 return View("Listar");
             }
             catch (Exception ex)

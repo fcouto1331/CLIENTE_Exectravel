@@ -7,6 +7,7 @@ namespace C1DOMAIN.Interfaces.IServices
         #region Transação
 
         List<TransacaoEntity> Listar();
+        List<TransacaoCustomEntity> ListarCustom();
         void Criar(TransacaoEntity transacao);
         TransacaoEntity PegarPorGuidId(Guid GuidId);
         void Deletar(Guid GuidId);

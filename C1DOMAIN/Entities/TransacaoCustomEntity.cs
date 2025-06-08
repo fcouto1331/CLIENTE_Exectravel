@@ -2,8 +2,8 @@
 {
     public class TransacaoCustomEntity : TransacaoEntity
     {
-        public TransacaoCustomEntity(int id, Guid guidId, bool transacaoStatus, DateTime transacaoDataCadastro, DateTime dataAtualizacao, int empresa_Id, string mes, string ano, string empresaNome)
-            : base(id, guidId, transacaoStatus, transacaoDataCadastro, dataAtualizacao, empresa_Id, mes, ano)
+        public TransacaoCustomEntity(int id, Guid guidId, DateTime transacaoDataCadastro, DateTime transacaoDataAtualizacao, int empresa_Id, int mes, int ano, DateTime periodoIni, DateTime periodoFim, string empresaNome)
+            : base(id, guidId, transacaoDataCadastro, transacaoDataAtualizacao, empresa_Id, mes, ano, periodoIni, periodoFim)
         {
             EmpresaNome = empresaNome;
         }

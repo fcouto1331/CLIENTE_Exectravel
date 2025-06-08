@@ -1,18 +1,17 @@
 ﻿using C1DOMAIN.Entities;
 using C1DOMAIN.Interfaces.IRepositories;
-using C2INFRA_SQL.Dapper;
-using Dapper;
+using C1DOMAIN.Interfaces.IServices;
 using System.Data;
 using System.Text;
 
-namespace C2INFRA_SQL.Repositories
+namespace C1DOMAIN.Services
 {
-    public class TransacaoRepository : ITransacaoRepository
+    public class TransacaoService : ITransacaoService
     {
-        private readonly DapperContext _context;
-        public TransacaoRepository(DapperContext context)
+        public readonly ITransacaoRepository _repository;
+        public TransacaoService(ITransacaoRepository repository)
         {
-            _context = context;
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         #region Transação
@@ -22,17 +21,7 @@ namespace C2INFRA_SQL.Repositories
             throw new NotImplementedException();
         }
 
-        public List<TransacaoCustomEntity> ListarCustom()
-        {
-            using (var db = _context.DapperConexao())
-            {
-                db.Open();
-                StringBuilder query = new StringBuilder();
-                query.Append(" SELECT t.Id, t.GuidId, t.TransacaoDataCadastro, t.TransacaoDataAtualizacao, t.Empresa_Id, t.Mes, t.Ano, t.periodoIni, t.periodoFim, e.Nome as EmpresaNome FROM Transacao as t");
-                query.Append(" inner join Empresa as e on e.Id = t.Empresa_Id");
-                return [.. db.Query<TransacaoCustomEntity>(query.ToString(), commandType: CommandType.Text)];
-            }
-        }
+        public List<TransacaoCustomEntity> ListarCustom() => _repository.ListarCustom();
 
         public void Criar(TransacaoEntity transacao)
         {

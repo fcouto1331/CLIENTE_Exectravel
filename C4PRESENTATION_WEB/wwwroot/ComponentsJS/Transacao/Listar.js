@@ -1,17 +1,18 @@
-﻿const carregarTransacao = () => {
-    fetch('/Transacao/JsonListar', {
-        method: 'POST',
+﻿// Listar
+
+const carregarTransacao = () => {
+    fetch('/Transacao/ListarJson', {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }
     })
         .then(response => response.json())
-        .then(data => {
-            const registros = document.getElementById('registros');
+        .then(responseData => {
+            let registros = document.getElementById('registros');
             registros.innerHTML = '';
-
-            if (data && data.ret) {
-                const transacao = data.transacao;
+            if (responseData && responseData.ret) {
+                const transacao = responseData.transacao;
                 if (transacao && transacao.length > 0) {
                     let tabela = '';
                     tabela += `<table class="table table-bordered"><caption>Total: ${transacao.length}</caption>`;
@@ -23,8 +24,9 @@
                             <th>Ano</th>
                             <th>Período Inicial</th>
                             <th>Período Final</th>
-                            <th>Data Cadastro</th>
-                            <th>Data Cad. Atualizado</th>
+                            <th>Cadastro</th>
+                            <th>Cad. Atualizado</th>
+                            <th>Ações</th>
                         </tr>
                     </thead><tbody>`;
 
@@ -38,6 +40,13 @@
                             <td>${formatarData(item.periodoFim) ?? ''}</td>
                             <td>${formatarData(item.transacaoDataCadastro) ?? ''}</td>
                             <td>${formatarData(item.transacaoDataAtualizacao) ?? ''}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" onclick="showModalAtualizar('${item.guidId}')" title='Editar transação'>E</button>
+                                <button class="btn btn-danger btn-sm" onclick="deletar('${item.guidId}')" title='Deletar transação'>D</button>
+                                <button class="btn btn-warning btn-sm" onclick="deletar('${item.guidId}')" title='Importação dados para transação'>I</button>
+                                <button class="btn btn-info btn-sm" onclick="deletar('${item.guidId}')" title='Relatório dos dados'>R</button>
+                                <button class="btn btn-success btn-sm" onclick="deletar('${item.guidId}')" title='Gráfico dos dados'>G</button>
+                            </td>
                         </tr>`;
                     });
 
@@ -49,30 +58,11 @@
             } else {
                 registros.innerHTML = `<div class="text-danger">${data.output?.msg ?? 'Erro.'}</div>`;
             }
-            console.log(data)
+            //console.log(data)
         })
         .catch(error => {
             alert(`${error}`)
         });
 }
 
-//const abrirModalCriarCliente = () => {
-//    let modal = document.getElementById('modalCriarCliente');
-//    fetch('/html/Cliente/Criar.html')
-//        .then(response => {
-//            if (!response.ok) throw new Error('Erro ao carregar o formulário');
-//            return response.text();
-//        })
-//        .then(data => {
-//            modal.innerHTML = '';
-//            modal.innerHTML = data;
-//            var modalInstance = new bootstrap.Modal(modal);
-//            modalInstance.show();
-//        })
-//        .catch(error => {
-//            alert(`${error}`);
-//        });
-//}
-
-// Opcional: chama automaticamente ao carregar a página
 document.addEventListener('DOMContentLoaded', carregarTransacao);

@@ -10,6 +10,7 @@ namespace C3APPLICATION.Interfaces
         List<TransacaoCustomDTO> ListarCustom();
         void Criar(TransacaoDTO transacao);
         TransacaoDTO PegarPorGuidId(Guid GuidId);
+        void Atualizar(TransacaoDTO transacao);
         void Deletar(Guid GuidId);
 
         #endregion

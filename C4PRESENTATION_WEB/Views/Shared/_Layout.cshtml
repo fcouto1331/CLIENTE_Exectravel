@@ -19,16 +19,16 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" style="font-size: 25px;">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" style="color: #2c82c9 !important;" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" style="color: #2c82c9 !important;"  asp-area="" asp-controller="Empresa" asp-action="Listar">Empresa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Transacao" asp-action="Listar">Transação</a>
+                            <a class="nav-link text-dark" style="color: #2c82c9 !important;" asp-area="" asp-controller="Transacao" asp-action="Listar">Transação</a>
                         </li>
                     </ul>
                 </div>
@@ -43,13 +43,13 @@
 
     <footer class="border-top footer bg-primary text-white">
         <div class="container-fluid">
-            &copy; Exectravel Viagens - Sistema para importação de dados. 2025 á @DateTime.Now.Year
+            &copy; Exectravel Viagens - Sistema para controle de centro de custo. (versão 1.0.0) 2025 á @DateTime.Now.Year
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/componentsjs/funcoesextensions.js"></script>
+    <script src="~/componentsjs/funcoesdataextensions.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

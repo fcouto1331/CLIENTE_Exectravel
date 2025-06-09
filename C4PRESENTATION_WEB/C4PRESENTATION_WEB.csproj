@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\ComponentsHTML\Transacao\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\C3APPLICATION\C3APPLICATION.csproj" />
   </ItemGroup>
 

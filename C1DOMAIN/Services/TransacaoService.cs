@@ -23,20 +23,13 @@ namespace C1DOMAIN.Services
 
         public List<TransacaoCustomEntity> ListarCustom() => _repository.ListarCustom();
 
-        public void Criar(TransacaoEntity transacao)
-        {
-            throw new NotImplementedException();
-        }
+        public void Criar(TransacaoEntity transacao) => _repository.Criar(transacao);
 
-        public TransacaoEntity PegarPorGuidId(Guid GuidId)
-        {
-            throw new NotImplementedException();
-        }
+        public TransacaoEntity PegarPorGuidId(Guid GuidId) => _repository.PegarPorGuidId(GuidId);
 
-        public void Deletar(Guid GuidId)
-        {
-            throw new NotImplementedException();
-        }
+        public void Atualizar(TransacaoEntity transacao) => _repository.Atualizar(transacao);
+
+        public void Deletar(Guid GuidId) => _repository.Deletar(GuidId);
 
         #endregion
 

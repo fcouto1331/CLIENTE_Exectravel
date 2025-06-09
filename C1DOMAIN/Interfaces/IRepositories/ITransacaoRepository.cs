@@ -10,6 +10,7 @@ namespace C1DOMAIN.Interfaces.IRepositories
         List<TransacaoCustomEntity> ListarCustom();
         void Criar(TransacaoEntity transacao);
         TransacaoEntity PegarPorGuidId(Guid GuidId);
+        void Atualizar(TransacaoEntity transacao);
         void Deletar(Guid GuidId);
 
         #endregion

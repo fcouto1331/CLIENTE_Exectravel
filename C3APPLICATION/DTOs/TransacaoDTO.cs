@@ -4,7 +4,7 @@
     {
         public DateTime TransacaoDataCadastro { get; set; }
         public DateTime TransacaoDataAtualizacao { get; set; }
-        public int Empresa_Id { get; set; }
+        public int EmpresaId { get; set; }
         public int Mes { get; set; }
         public int Ano { get; set; }
         public DateTime PeriodoIni { get; set; }

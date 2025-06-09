@@ -6,6 +6,15 @@ namespace C3APPLICATION.Mapster
 {
     public class Mapper
     {
+        #region Empresa
+
+        public static List<EmpresaCustomDTO> ToListEmpresaCustomDTO(List<EmpresaCustomEntity> empresaCustomEntity)
+        {
+            return empresaCustomEntity.Adapt<List<EmpresaCustomDTO>>();
+        }
+
+        #endregion
+
         #region Transação
 
         public static TransacaoDTO ToTransacaoDTO(TransacaoEntity transacaoEntity)

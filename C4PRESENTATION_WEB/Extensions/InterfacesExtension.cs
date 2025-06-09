@@ -13,6 +13,9 @@ namespace C4PRESENTATION_WEB.Extensions
         public static void AddInterfaces(this IServiceCollection services)
         {
             services.AddScoped<DapperContext>();
+            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+            services.AddScoped<IEmpresaService, EmpresaService>();
+            services.AddScoped<IEmpresaApp, EmpresaApp>();
             services.AddScoped<ITransacaoRepository, TransacaoRepository>();
             services.AddScoped<ITransacaoService, TransacaoService>();
             services.AddScoped<ITransacaoApp, TransacaoApp>();

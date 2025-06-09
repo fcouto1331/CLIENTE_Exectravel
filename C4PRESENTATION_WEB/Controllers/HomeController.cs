@@ -23,6 +23,11 @@ namespace C4PRESENTATION_WEB.Controllers
             return View();
         }
 
+        public IActionResult XXX()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

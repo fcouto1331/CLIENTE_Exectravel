@@ -1,0 +1,48 @@
+﻿<div class="modal-dialog" style="max-width: 95% !important; --bs-modal-width: 95% !important">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Criar nova transação</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="frmCriar">
+                <div class="card">
+                    <div class="card-header">Criar</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-1">
+                                <label for="Mes" class="form-label">Mês</label>
+                                <input type="number" class="form-control" id="Mes" required min="1" max="12" step="1">
+                            </div>
+                            <div class="col-1">
+                                <label for="Ano" class="form-label">Ano</label>
+                                <input type="number" class="form-control" id="Ano" required min="1" step="1">
+                            </div>
+                            <div class="col-5">
+                                <label for="PeriodoIni" class="form-label">Período inicial</label>
+                                <input type="date" class="form-control" id="PeriodoIni" required>
+                            </div>
+                            <div class="col-5">
+                                <label for="PeriodoFim" class="form-label">Período final</label>
+                                <input type="date" class="form-control" id="PeriodoFim" onchange="validarDataFim()" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="Empresa" class="form-label">Empresa</label>
+                                <select id="Empresa" class="form-select" required></select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" onclick="Criar(event)">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--<div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>-->
+    </div>
+</div>

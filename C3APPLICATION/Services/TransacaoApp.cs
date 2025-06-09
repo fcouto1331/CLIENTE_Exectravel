@@ -22,20 +22,13 @@ namespace C3APPLICATION.Services
 
         public List<TransacaoCustomDTO> ListarCustom() => Mapper.ToListTransacaoCustomDTO(_service.ListarCustom());
 
-        public void Criar(TransacaoDTO transacao)
-        {
-            throw new NotImplementedException();
-        }
+        public void Criar(TransacaoDTO transacao) => _service.Criar(Mapper.ToTransacaoEntity(transacao));
 
-        public TransacaoDTO PegarPorGuidId(Guid GuidId)
-        {
-            throw new NotImplementedException();
-        }
+        public TransacaoDTO PegarPorGuidId(Guid GuidId) => Mapper.ToTransacaoDTO(_service.PegarPorGuidId(GuidId));
 
-        public void Deletar(Guid GuidId)
-        {
-            throw new NotImplementedException();
-        }
+        public void Atualizar(TransacaoDTO transacao) => _service.Atualizar(Mapper.ToTransacaoEntity(transacao));
+
+        public void Deletar(Guid GuidId) => _service.Deletar(GuidId);
 
         #endregion
 

@@ -1,8 +1,22 @@
-﻿<div class="card">
+﻿<div class="row">
+    <div class="col-12">
+        <button type="button" class="btn btn-primary mb-2 float-end" id="btnShowModalCriar">Criar nova transação</button>
+    </div>
+</div>
+
+<div class="card">
     <div class="card-header bg-primary text-white">Transações</div>
     <div class="card-body">
         <div id="registros" class="table-responsive"></div>
     </div>
 </div>
 
+<div class="modal fade" id="modalCriar" tabindex="-1"></div>
+<div class="modal fade" id="modalAtualizar" tabindex="-1"></div>
+
+<div class="modal fade" id="modalListarDados" tabindex="-1"></div>
+
 <script src="~/componentsjs/transacao/listar.js"></script>
+<script src="~/componentsjs/transacao/criar.js"></script>
+<script src="~/componentsjs/transacao/atualizar.js"></script>
+<script src="~/componentsjs/transacao/deletar.js"></script>

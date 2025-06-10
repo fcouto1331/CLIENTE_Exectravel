@@ -2,7 +2,7 @@
 {
     public class TransacaoEntity : BaseEntity
     {
-        public TransacaoEntity(int id, Guid guidId, DateTime transacaoDataCadastro, DateTime transacaoDataAtualizacao, int empresaId, int mes, int ano, DateTime periodoIni, DateTime periodoFim)//, TransacaoDadosEntity transacaoDados) 
+        public TransacaoEntity(int id, Guid guidId, DateTime transacaoDataCadastro, DateTime transacaoDataAtualizacao, int empresaId, int mes, int ano, DateTime periodoIni, DateTime periodoFim) //, TransacaoDadosEntity transacaoDados) 
             : base(id, guidId)
         {
             TransacaoDataCadastro = transacaoDataCadastro;
@@ -12,6 +12,7 @@
             Ano = ano;
             PeriodoIni = periodoIni;
             PeriodoFim = periodoFim;
+
             //TransacaoDados = transacaoDados;
         }
 
@@ -22,6 +23,7 @@
         public int Ano { get; private set; }
         public DateTime PeriodoIni { get; private set; }
         public DateTime PeriodoFim { get; private set; }
+
         //public TransacaoDadosEntity TransacaoDados { get; private set; } // Navigation property
     }
 }

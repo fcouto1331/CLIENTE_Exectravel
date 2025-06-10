@@ -108,6 +108,19 @@ namespace C2INFRA_SQL.Repositories
 
         #region Dados da Transação
 
+        public List<TransacaoDadosEntity> ListarTransacaoDados(Guid GuidId)
+        {
+            using (var db = _context.DapperConexao())
+            {
+                db.Open();
+                StringBuilder query = new StringBuilder();
+                query.Append(" declare @Id int = (select Id from Transacao where GuidId = @GuidId);");
+                query.Append(" SELECT Id, GuidId, TransacaoDadosDataCadastro, TransacaoDadosDataAtualizacao, TransacaoId, CCusto, TotalCliente FROM TransacaoDados");
+                query.Append(" WHERE TransacaoId = @Id;");
+                return [.. db.Query<TransacaoDadosEntity>(query.ToString(), new { GuidId = GuidId }, commandType: CommandType.Text)];
+            }
+        }
+
         public void CriarLoteTransacaoDados(List<TransacaoDadosEntity> transacaoDados)
         {
             throw new NotImplementedException();
@@ -132,6 +145,7 @@ namespace C2INFRA_SQL.Repositories
         {
             throw new NotImplementedException();
         }
+
 
         #endregion
     }

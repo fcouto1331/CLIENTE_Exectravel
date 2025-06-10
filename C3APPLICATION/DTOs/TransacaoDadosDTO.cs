@@ -7,6 +7,7 @@
         public int TransacaoId { get; set; }
         public string? CCusto { get; set; }
         public decimal TotalCliente { get; set; }
+
         //public TransacaoDTO? Transacao { get; set; } // Navigation property
     }
 }

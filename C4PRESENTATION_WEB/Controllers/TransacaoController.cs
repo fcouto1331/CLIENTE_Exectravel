@@ -111,7 +111,18 @@ namespace C4PRESENTATION_WEB.Controllers
 
         #region Dados da Transação
 
-
+        [HttpGet]
+        public IActionResult ListarTransacaoDadosJson(Guid GuidId)
+        {
+            try
+            {
+                return Json(new { ret = true, msg = "Sucesso.", transacao = _app.ListarTransacaoDados(GuidId) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { ret = false, msg = ex.Message });
+            }
+        }
 
         #endregion
 

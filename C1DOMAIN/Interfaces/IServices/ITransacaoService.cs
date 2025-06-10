@@ -17,6 +17,7 @@ namespace C1DOMAIN.Interfaces.IServices
 
         #region Dados da Transação
 
+        List<TransacaoDadosEntity> ListarTransacaoDados(Guid GuidId);
         void CriarLoteTransacaoDados(List<TransacaoDadosEntity> transacaoDados);
         void CriarTransacaoDados(TransacaoDadosEntity transacaoDados);
         TransacaoDadosEntity PegarTransacaoDadosPorGuidId(Guid GuidId);

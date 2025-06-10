@@ -52,5 +52,29 @@ namespace C3APPLICATION.Mapster
         }
 
         #endregion
+
+        #region Dados da Transação
+
+        public static TransacaoDadosDTO ToTransacaoDadosDTO(TransacaoDadosEntity transacaoDadosEntity)
+        {
+            return transacaoDadosEntity.Adapt<TransacaoDadosDTO>();
+        }
+
+        public static TransacaoDadosEntity ToTransacaoDadosEntity(TransacaoDadosDTO transacaoDadosDTO)
+        {
+            return transacaoDadosDTO.Adapt<TransacaoDadosEntity>();
+        }
+
+        public static List<TransacaoDadosDTO> ToListTransacaoDadosDTO(List<TransacaoDadosEntity> transacaoDadosEntity)
+        {
+            return transacaoDadosEntity.Adapt<List<TransacaoDadosDTO>>();
+        }
+
+        public static List<TransacaoDadosEntity> ToListTransacaoDadosEntity(List<TransacaoDadosDTO> transacaoDadosDTO)
+        {
+            return transacaoDadosDTO.Adapt<List<TransacaoDadosEntity>>();
+        }
+
+        #endregion
     }
 }

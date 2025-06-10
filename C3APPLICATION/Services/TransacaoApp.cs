@@ -1,4 +1,5 @@
-﻿using C1DOMAIN.Interfaces.IServices;
+﻿using C1DOMAIN.Entities;
+using C1DOMAIN.Interfaces.IServices;
 using C3APPLICATION.DTOs;
 using C3APPLICATION.Interfaces;
 using C3APPLICATION.Mapster;
@@ -33,6 +34,8 @@ namespace C3APPLICATION.Services
         #endregion
 
         #region Dados da Transação
+
+        public List<TransacaoDadosDTO> ListarTransacaoDados(Guid GuidId) => Mapper.ToListTransacaoDadosDTO(_service.ListarTransacaoDados(GuidId));
 
         public void CriarLoteTransacaoDados(List<TransacaoDadosDTO> transacaoDados)
         {

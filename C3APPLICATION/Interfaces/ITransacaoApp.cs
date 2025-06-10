@@ -1,4 +1,5 @@
-﻿using C3APPLICATION.DTOs;
+﻿using C1DOMAIN.Entities;
+using C3APPLICATION.DTOs;
 
 namespace C3APPLICATION.Interfaces
 {
@@ -17,6 +18,7 @@ namespace C3APPLICATION.Interfaces
 
         #region Dados da Transação
 
+        List<TransacaoDadosDTO> ListarTransacaoDados(Guid GuidId);
         void CriarLoteTransacaoDados(List<TransacaoDadosDTO> transacaoDados);
         void CriarTransacaoDados(TransacaoDadosDTO transacaoDados);
         TransacaoDadosDTO PegarTransacaoDadosPorGuidId(Guid GuidId);

@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Customização */
+
+.table {
+    font-size: 12px !important;
+}

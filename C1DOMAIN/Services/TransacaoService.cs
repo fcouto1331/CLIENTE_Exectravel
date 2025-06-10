@@ -35,6 +35,8 @@ namespace C1DOMAIN.Services
 
         #region Dados da Transação
 
+        public List<TransacaoDadosEntity> ListarTransacaoDados(Guid GuidId) => _repository.ListarTransacaoDados(GuidId);
+
         public void CriarLoteTransacaoDados(List<TransacaoDadosEntity> transacaoDados)
         {
             throw new NotImplementedException();

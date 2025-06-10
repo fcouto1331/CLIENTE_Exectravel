@@ -1,6 +1,4 @@
-﻿// Listar
-
-const carregarTransacao = () => {
+﻿const carregarTransacao = () => {
     fetch('/Transacao/ListarJson', {
         method: 'GET',
         headers: {
@@ -43,9 +41,9 @@ const carregarTransacao = () => {
                             <td>
                                 <button class="btn btn-primary btn-sm" onclick="showModalAtualizar('${item.guidId}')" title='Editar transação'>E</button>
                                 <button class="btn btn-danger btn-sm" onclick="deletar('${item.guidId}')" title='Deletar transação'>D</button>
-                                <button class="btn btn-warning btn-sm" onclick="deletar('${item.guidId}')" title='Importação dados para transação'>I</button>
-                                <button class="btn btn-info btn-sm" onclick="deletar('${item.guidId}')" title='Relatório dos dados'>R</button>
-                                <button class="btn btn-success btn-sm" onclick="deletar('${item.guidId}')" title='Gráfico dos dados'>G</button>
+                                <button class="btn btn-warning btn-sm" onclick="deletar('${item.guidId}')" title='Importação'>I</button>
+                                <button class="btn btn-info btn-sm" onclick="showModalListarDados('${item.guidId}')" title='Relatório'>R</button>
+                                <button class="btn btn-success btn-sm" onclick="deletar('${item.guidId}')" title='Gráfico'>G</button>
                             </td>
                         </tr>`;
                     });

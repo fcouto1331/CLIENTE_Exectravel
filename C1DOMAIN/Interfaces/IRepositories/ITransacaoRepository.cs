@@ -23,6 +23,7 @@ namespace C1DOMAIN.Interfaces.IRepositories
         TransacaoDadosEntity PegarTransacaoDadosPorGuidId(Guid GuidId);
         void AtualizarTransacaoDados(TransacaoDadosEntity transacaoDados);
         void DeletarTransacaoDados(Guid GuidId);
+        List<TransacaoDadosGraficoEntity> ListarTransacaoDadosGrafico(Guid GuidId);
 
         #endregion
     }

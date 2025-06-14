@@ -37,10 +37,7 @@ namespace C3APPLICATION.Services
 
         public List<TransacaoDadosDTO> ListarTransacaoDados(Guid GuidId) => Mapper.ToListTransacaoDadosDTO(_service.ListarTransacaoDados(GuidId));
 
-        public void CriarLoteTransacaoDados(List<TransacaoDadosDTO> transacaoDados)
-        {
-            throw new NotImplementedException();
-        }
+        public void CriarLoteTransacaoDados(TransacaoDadosExcelFormDTO transacaoDadosExcelForm) => _service.CriarLoteTransacaoDados(Mapper.ToTransacaoDadosExcelFormEntity(transacaoDadosExcelForm));
 
         public void CriarTransacaoDados(TransacaoDadosDTO transacaoDados)
         {
@@ -61,6 +58,8 @@ namespace C3APPLICATION.Services
         {
             throw new NotImplementedException();
         }
+
+        public List<TransacaoDadosGraficoDTO> ListarTransacaoDadosGrafico(Guid GuidId) => Mapper.ToListTransacaoDadosGraficoDTO(_service.ListarTransacaoDadosGrafico(GuidId));
 
         #endregion
     }

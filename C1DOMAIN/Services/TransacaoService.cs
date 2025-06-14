@@ -1,17 +1,19 @@
 ﻿using C1DOMAIN.Entities;
 using C1DOMAIN.Interfaces.IRepositories;
 using C1DOMAIN.Interfaces.IServices;
-using System.Data;
-using System.Text;
 
 namespace C1DOMAIN.Services
 {
     public class TransacaoService : ITransacaoService
     {
-        public readonly ITransacaoRepository _repository;
-        public TransacaoService(ITransacaoRepository repository)
+        private readonly ITransacaoRepository _repository;
+        private readonly IExcelRepository _repositoryExcel;
+        private readonly IColorService _serviceColor;
+        public TransacaoService(ITransacaoRepository repository, IExcelRepository repositoryExcel, IColorService serviceColor)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _repositoryExcel = repositoryExcel ?? throw new ArgumentException(nameof(repositoryExcel));
+            _serviceColor = serviceColor ?? throw new ArgumentNullException(nameof(serviceColor));
         }
 
         #region Transação
@@ -37,9 +39,37 @@ namespace C1DOMAIN.Services
 
         public List<TransacaoDadosEntity> ListarTransacaoDados(Guid GuidId) => _repository.ListarTransacaoDados(GuidId);
 
-        public void CriarLoteTransacaoDados(List<TransacaoDadosEntity> transacaoDados)
+        public void CriarLoteTransacaoDados(TransacaoDadosExcelFormEntity transacaoDadosExcelForm)
         {
-            throw new NotImplementedException();
+            using (var memoryStream = new MemoryStream())
+            {
+                transacaoDadosExcelForm.Arquivo.CopyTo(memoryStream);
+
+                List<TransacaoDadosExcelEntity> transacaoDadosExcel = new List<TransacaoDadosExcelEntity>();
+                if (string.IsNullOrEmpty(transacaoDadosExcelForm.NomeSheet)) transacaoDadosExcelForm.AlterarNomeSheet("Planilha1"); // Default sheet namee
+                _repositoryExcel.LerExcelPorStream(memoryStream, ref transacaoDadosExcel, transacaoDadosExcelForm.NomeSheet);
+
+                transacaoDadosExcel.RemoveAll(x => string.IsNullOrEmpty(x.CCusto) || string.IsNullOrEmpty(x.TotalCliente));
+
+                List<TransacaoDadosEntity> transacaoDados = new List<TransacaoDadosEntity>();
+                DateTime dataAtual = DateTime.Now;
+                foreach (var item in transacaoDadosExcel)
+                {
+                    transacaoDados.Add(new TransacaoDadosEntity(
+                        0,
+                        Guid.NewGuid(),
+                        dataAtual,
+                        dataAtual,
+                        transacaoDadosExcelForm.TransacaoId,
+                        item.CCusto!,
+                        decimal.Parse(item.TotalCliente!)
+                        )
+                    {
+                    });
+                }
+
+                _repository.CriarLoteTransacaoDados(transacaoDados);
+            }
         }
 
         public void CriarTransacaoDados(TransacaoDadosEntity transacaoDados)
@@ -60,6 +90,23 @@ namespace C1DOMAIN.Services
         public void DeletarTransacaoDados(Guid GuidId)
         {
             throw new NotImplementedException();
+        }
+
+        public List<TransacaoDadosGraficoEntity> ListarTransacaoDadosGrafico(Guid GuidId)
+        {
+            List<TransacaoDadosGraficoEntity> transacaoDadosGraficoEntity = _repository.ListarTransacaoDadosGrafico(GuidId);
+            if (transacaoDadosGraficoEntity.Count > 0)
+            {
+                foreach (var item in transacaoDadosGraficoEntity)
+                {
+                    if (item.Rgba.IsEmpty)
+                    {
+                        item.AlterarRgba(_serviceColor.PegarColor());
+                    }
+                }
+            }
+            return transacaoDadosGraficoEntity;
+
         }
 
         #endregion

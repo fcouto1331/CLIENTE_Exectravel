@@ -1,4 +1,5 @@
-﻿using C3APPLICATION.DTOs;
+﻿using C1DOMAIN.Entities;
+using C3APPLICATION.DTOs;
 using C3APPLICATION.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace C4PRESENTATION_WEB.Controllers
     {
         private readonly ITransacaoApp _app;
         private readonly IEmpresaApp _appEmpresa;
+
         public TransacaoController(ITransacaoApp app, IEmpresaApp appEmpresa)
         {
             _app = app ?? throw new ArgumentNullException(nameof(app));
@@ -117,6 +119,41 @@ namespace C4PRESENTATION_WEB.Controllers
             try
             {
                 return Json(new { ret = true, msg = "Sucesso.", transacao = _app.ListarTransacaoDados(GuidId) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { ret = false, msg = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CriarLoteTransacaoDadosJson([FromForm] TransacaoDadosExcelFormDTO transacaoDadosExcelForm)
+        {
+            try
+            {
+                if (transacaoDadosExcelForm.Arquivo == null || transacaoDadosExcelForm.Arquivo.Length == 0) return Json(new { ret = false, msg = "Arquivo inválido." });
+                 _app.CriarLoteTransacaoDados(transacaoDadosExcelForm);                
+                return Json(new { ret = true, msg = "Sucesso." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { ret = false, msg = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Grafico(Guid TransacaoId) 
+        {
+            ViewBag.GuidId = TransacaoId;
+            return View("Grafico");
+        }
+
+        [HttpGet]
+        public IActionResult ListarGraficoJson(Guid GuidId)
+        {
+            try
+            {
+              return Json(new { ret = true, msg = "Sucesso.", transacaoDados = _app.ListarTransacaoDadosGrafico(GuidId) });
             }
             catch (Exception ex)
             {

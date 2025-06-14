@@ -12,9 +12,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                @* <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/img/logo_exectravel.png" />
-                </a>
+                </a> *@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -43,7 +43,13 @@
 
     <footer class="border-top footer bg-primary text-white">
         <div class="container-fluid">
-            &copy; Exectravel Viagens - Sistema para controle de centro de custo. (versão 1.0.0) 2025 á @DateTime.Now.Year
+            &copy; System (v1.0.0) 2025 @(DateTime.Now.Year > 2025 ? $"á {DateTime.Now.Year}" : "")
+            @* <span class="float-end text-black bg-white" style="padding-left: 4px; padding-right: 4px;">
+                Developer by &nbsp;
+                <a href="https://br.linkedin.com/in/fl%C3%A1vio-couto-123578237?trk=people-guest_people_search-card" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="24" height="24">
+                </a>
+            </span> *@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

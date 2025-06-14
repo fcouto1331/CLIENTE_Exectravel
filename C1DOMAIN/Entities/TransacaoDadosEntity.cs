@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace C1DOMAIN.Entities
 {
+    [Table("TransacaoDados")] // Necessário para mapear a tabela no banco de dados e fazer o bulk insert corretamente
     public class TransacaoDadosEntity : BaseEntity
     {
         public TransacaoDadosEntity(int id, Guid guidId, DateTime transacaoDadosDataCadastro, DateTime transacaoDadosDataAtualizacao, int transacaoId, string cCusto, decimal totalCliente) //, TransacaoEntity transacao)

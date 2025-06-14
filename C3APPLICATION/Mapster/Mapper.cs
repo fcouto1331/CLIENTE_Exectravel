@@ -75,6 +75,55 @@ namespace C3APPLICATION.Mapster
             return transacaoDadosDTO.Adapt<List<TransacaoDadosEntity>>();
         }
 
+        public static TransacaoDadosExcelFormDTO ToTransacaoDadosExcelFormDTO(TransacaoDadosExcelFormEntity transacaoDadosExcelFormEntity)
+        {
+            TransacaoDadosExcelFormDTO ToTransacaoDadosExcelFormDTO = new TransacaoDadosExcelFormDTO
+            {
+                Arquivo = transacaoDadosExcelFormEntity.Arquivo,
+                NomeSheet = transacaoDadosExcelFormEntity.NomeSheet,
+                TransacaoId = transacaoDadosExcelFormEntity.TransacaoId
+            };
+
+            return ToTransacaoDadosExcelFormDTO;
+        }
+
+        public static TransacaoDadosExcelFormEntity ToTransacaoDadosExcelFormEntity(TransacaoDadosExcelFormDTO transacaoDadosExcelFormDTO)
+        {
+            TransacaoDadosExcelFormEntity transacaoDadosExcelFormEntity = new TransacaoDadosExcelFormEntity(
+                    transacaoDadosExcelFormDTO.Arquivo!,
+                    transacaoDadosExcelFormDTO.NomeSheet!,
+                    transacaoDadosExcelFormDTO.TransacaoId
+                )
+            { };
+
+            return transacaoDadosExcelFormEntity;
+        }
+
+        public static TransacaoDadosGraficoDTO ToTransacaoDadosGraficoDTO(TransacaoDadosGraficoEntity transacaoDadosGraficoEntity)
+        {
+            return transacaoDadosGraficoEntity.Adapt<TransacaoDadosGraficoDTO>();
+        }
+
+        public static TransacaoDadosGraficoEntity ToTransacaoDadosGraficoEntity(TransacaoDadosGraficoEntity transacaoDadosGraficoEntity)
+        {
+            return transacaoDadosGraficoEntity.Adapt<TransacaoDadosGraficoEntity>();
+        }
+
+        public static List<TransacaoDadosGraficoDTO> ToListTransacaoDadosGraficoDTO(List<TransacaoDadosGraficoEntity> transacaoDadosGraficoEntity)
+        {
+            List<TransacaoDadosGraficoDTO> TransacaoDadosGraficoDTO = new List<TransacaoDadosGraficoDTO>();
+            foreach (var item in transacaoDadosGraficoEntity)
+            {
+                TransacaoDadosGraficoDTO.Add(new TransacaoDadosGraficoDTO()
+                {
+                    CCusto = item.CCusto,
+                    TotalCliente = item.TotalCliente,
+                    Rgba = item.Rgba
+                });
+            }
+            return TransacaoDadosGraficoDTO;
+        }
+
         #endregion
     }
 }

@@ -19,11 +19,13 @@ namespace C3APPLICATION.Interfaces
         #region Dados da Transação
 
         List<TransacaoDadosDTO> ListarTransacaoDados(Guid GuidId);
-        void CriarLoteTransacaoDados(List<TransacaoDadosDTO> transacaoDados);
+        void CriarLoteTransacaoDados(TransacaoDadosExcelFormDTO transacaoDadosExcelForm);
         void CriarTransacaoDados(TransacaoDadosDTO transacaoDados);
         TransacaoDadosDTO PegarTransacaoDadosPorGuidId(Guid GuidId);
         void AtualizarTransacaoDados(TransacaoDadosDTO transacaoDados);
         void DeletarTransacaoDados(Guid GuidId);
+        List<TransacaoDadosGraficoDTO> ListarTransacaoDadosGrafico(Guid GuidId);
+
 
         #endregion
     }

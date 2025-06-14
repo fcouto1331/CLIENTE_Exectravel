@@ -1,0 +1,40 @@
+﻿<div class="modal-dialog" style="max-width: 95% !important; --bs-modal-width: 95% !important">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Importação</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="frmCriar">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Criar lote</div>
+                    <div class="card-body">
+                        <input type="hidden" id="TransacaoId" />
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="NomeSheet" class="form-label">Sheet</label>
+                                <input type="text" id="NomeSheet" class="form-control" min="1" max="100" value="Planilha1" required />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="Arquivo" class="form-label">Arquivo</label>
+                                <input type="file" id="Arquivo" class="form-control" accept=".xlsx" required />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" onclick="criarLoteDados(event)">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<form method="post" enctype="multipart/form-data" action="/Transacao/CriarLoteTransacaoDadosJson">
+    <label>Selecione o arquivo Excel:</label>
+    <input type="file" name="arquivo" accept=".xlsx" required />
+    <button type="submit">Enviar</button>
+</form>-->

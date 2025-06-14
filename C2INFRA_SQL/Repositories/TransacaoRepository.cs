@@ -2,8 +2,10 @@
 using C1DOMAIN.Interfaces.IRepositories;
 using C2INFRA_SQL.Dapper;
 using Dapper;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Text;
+using Z.Dapper.Plus;
 
 namespace C2INFRA_SQL.Repositories
 {
@@ -123,7 +125,19 @@ namespace C2INFRA_SQL.Repositories
 
         public void CriarLoteTransacaoDados(List<TransacaoDadosEntity> transacaoDados)
         {
-            throw new NotImplementedException();
+            using (var db = _context.DapperConexao())
+            {
+                db.Open();
+
+                //db.BulkInsert(transacaoDados, options =>
+                //{
+                //    options.TableName = "TransacaoDados";
+                //    options.BatchSize = 1000; // Define o tamanho do lote para inserção
+                //    options.AutoMap = true; // Mapeia automaticamente as propriedades da entidade para as colunas da tabela
+                //});
+
+                db.BulkInsert(transacaoDados);
+            }
         }
 
         public void CriarTransacaoDados(TransacaoDadosEntity transacaoDados)
@@ -146,6 +160,17 @@ namespace C2INFRA_SQL.Repositories
             throw new NotImplementedException();
         }
 
+        public List<TransacaoDadosGraficoEntity> ListarTransacaoDadosGrafico(Guid GuidId)
+        {
+            using (var db = _context.DapperConexao())
+            {
+                db.Open();
+                StringBuilder query = new StringBuilder();
+                query.Append(" declare @Id int = (select Id from Transacao where GuidId = @GuidId);");
+                query.Append(" SELECT CCusto, Sum(TotalCliente) as TotalCliente FROM TransacaoDados where TransacaoId = @Id group by CCusto;");
+                return [.. db.Query<TransacaoDadosGraficoEntity>(query.ToString(), new { GuidId = GuidId }, commandType: CommandType.Text)];
+            }
+        }
 
         #endregion
     }

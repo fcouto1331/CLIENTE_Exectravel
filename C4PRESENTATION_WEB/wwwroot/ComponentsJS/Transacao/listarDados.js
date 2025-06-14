@@ -14,14 +14,13 @@ const showModalListarDados = (GuidId) => {
                 _modalListarDados.innerHTML = '';
                 _modalListarDados.innerHTML = responseData;
                 carregarTransacaoDados(GuidId)
-                // INI - Cria uma instância do Bootstrap / Modal caso não exista
+
                 let _modalInstance = bootstrap.Modal.getInstance(_modalListarDados);
                 if (!_modalInstance) {
                     _modalInstance = new bootstrap.Modal(_modalListarDados);
                 }
                 _modalInstance.show();
-                // FIM
-            }
+             }
         })
         .catch(error => {
             alert(`Erro ${error}`);
@@ -84,7 +83,6 @@ const carregarTransacaoDados = (GuidId) => {
             } else {
                 registros.innerHTML = `<div class="text-danger">${responseData.output?.msg ?? 'Erro.'}</div>`;
             }
-            //console.log(data)
         })
         .catch(error => {
             alert(`${error}`)

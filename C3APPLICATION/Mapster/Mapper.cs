@@ -75,6 +75,16 @@ namespace C3APPLICATION.Mapster
             return transacaoDadosDTO.Adapt<List<TransacaoDadosEntity>>();
         }
 
+        public static List<TransacaoDadosLiteDTO> ToListTransacaoDadosLiteDTO(List<TransacaoDadosLiteEntity> transacaoDadosLiteEntity)
+        {
+            return transacaoDadosLiteEntity.Adapt<List<TransacaoDadosLiteDTO>>();
+        }
+
+        public static List<TransacaoDadosLiteEntity> ToListTransacaoDadosLiteEntity(List<TransacaoDadosLiteDTO> transacaoDadosLiteDTO)
+        {
+            return transacaoDadosLiteDTO.Adapt<List<TransacaoDadosLiteEntity>>();
+        }
+
         public static TransacaoDadosExcelFormDTO ToTransacaoDadosExcelFormDTO(TransacaoDadosExcelFormEntity transacaoDadosExcelFormEntity)
         {
             TransacaoDadosExcelFormDTO ToTransacaoDadosExcelFormDTO = new TransacaoDadosExcelFormDTO

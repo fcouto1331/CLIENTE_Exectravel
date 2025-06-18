@@ -1,5 +1,4 @@
-﻿using C1DOMAIN.Entities;
-using C3APPLICATION.DTOs;
+﻿using C3APPLICATION.DTOs;
 using C3APPLICATION.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -118,7 +117,7 @@ namespace C4PRESENTATION_WEB.Controllers
         {
             try
             {
-                return Json(new { ret = true, msg = "Sucesso.", transacao = _app.ListarTransacaoDados(GuidId) });
+                return Json(new { ret = true, msg = "Sucesso.", transacao = _app.ListarTransacaoDadosLite(GuidId) });
             }
             catch (Exception ex)
             {

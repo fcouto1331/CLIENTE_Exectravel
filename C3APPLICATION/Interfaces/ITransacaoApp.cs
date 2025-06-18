@@ -19,6 +19,7 @@ namespace C3APPLICATION.Interfaces
         #region Dados da Transação
 
         List<TransacaoDadosDTO> ListarTransacaoDados(Guid GuidId);
+        List<TransacaoDadosLiteDTO> ListarTransacaoDadosLite(Guid GuidId);
         void CriarLoteTransacaoDados(TransacaoDadosExcelFormDTO transacaoDadosExcelForm);
         void CriarTransacaoDados(TransacaoDadosDTO transacaoDados);
         TransacaoDadosDTO PegarTransacaoDadosPorGuidId(Guid GuidId);

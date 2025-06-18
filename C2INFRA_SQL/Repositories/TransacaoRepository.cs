@@ -112,6 +112,11 @@ namespace C2INFRA_SQL.Repositories
 
         public List<TransacaoDadosEntity> ListarTransacaoDados(Guid GuidId)
         {
+            throw new NotImplementedException();
+        }
+
+        public List<TransacaoDadosLiteEntity> ListarTransacaoDadosLite(Guid GuidId)
+        {
             using (var db = _context.DapperConexao())
             {
                 db.Open();
@@ -119,7 +124,7 @@ namespace C2INFRA_SQL.Repositories
                 query.Append(" declare @Id int = (select Id from Transacao where GuidId = @GuidId);");
                 query.Append(" SELECT Id, GuidId, TransacaoDadosDataCadastro, TransacaoDadosDataAtualizacao, TransacaoId, CCusto, TotalCliente FROM TransacaoDados");
                 query.Append(" WHERE TransacaoId = @Id;");
-                return [.. db.Query<TransacaoDadosEntity>(query.ToString(), new { GuidId = GuidId }, commandType: CommandType.Text)];
+                return [.. db.Query<TransacaoDadosLiteEntity>(query.ToString(), new { GuidId = GuidId }, commandType: CommandType.Text)];
             }
         }
 

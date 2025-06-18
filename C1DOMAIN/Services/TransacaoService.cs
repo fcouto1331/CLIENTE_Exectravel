@@ -37,7 +37,46 @@ namespace C1DOMAIN.Services
 
         #region Dados da Transação
 
-        public List<TransacaoDadosEntity> ListarTransacaoDados(Guid GuidId) => _repository.ListarTransacaoDados(GuidId);
+        public List<TransacaoDadosEntity> ListarTransacaoDados(Guid GuidId) 
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TransacaoDadosLiteEntity> ListarTransacaoDadosLite(Guid GuidId) => _repository.ListarTransacaoDadosLite(GuidId);
+
+        // BKP 16/06/2025
+        //public void CriarLoteTransacaoDados(TransacaoDadosExcelFormEntity transacaoDadosExcelForm)
+        //{
+        //    using (var memoryStream = new MemoryStream())
+        //    {
+        //        transacaoDadosExcelForm.Arquivo.CopyTo(memoryStream);
+
+        //        List<TransacaoDadosExcelEntity> transacaoDadosExcel = new List<TransacaoDadosExcelEntity>();
+        //        if (string.IsNullOrEmpty(transacaoDadosExcelForm.NomeSheet)) transacaoDadosExcelForm.AlterarNomeSheet("Planilha1"); // Default sheet namee
+        //        _repositoryExcel.LerExcelPorStream(memoryStream, ref transacaoDadosExcel, transacaoDadosExcelForm.NomeSheet);
+
+        //        transacaoDadosExcel.RemoveAll(x => string.IsNullOrEmpty(x.CCusto) || string.IsNullOrEmpty(x.TotalCliente));
+
+        //        List<TransacaoDadosEntity> transacaoDados = new List<TransacaoDadosEntity>();
+        //        DateTime dataAtual = DateTime.Now;
+        //        foreach (var item in transacaoDadosExcel)
+        //        {
+        //            transacaoDados.Add(new TransacaoDadosEntity(
+        //                0,
+        //                Guid.NewGuid(),
+        //                dataAtual,
+        //                dataAtual,
+        //                transacaoDadosExcelForm.TransacaoId,
+        //                item.CCusto!,
+        //                decimal.Parse(item.TotalCliente!)
+        //                )
+        //            {
+        //            });
+        //        }
+
+        //        _repository.CriarLoteTransacaoDados(transacaoDados);
+        //    }
+        //}
 
         public void CriarLoteTransacaoDados(TransacaoDadosExcelFormEntity transacaoDadosExcelForm)
         {
@@ -47,9 +86,11 @@ namespace C1DOMAIN.Services
 
                 List<TransacaoDadosExcelEntity> transacaoDadosExcel = new List<TransacaoDadosExcelEntity>();
                 if (string.IsNullOrEmpty(transacaoDadosExcelForm.NomeSheet)) transacaoDadosExcelForm.AlterarNomeSheet("Planilha1"); // Default sheet namee
-                _repositoryExcel.LerExcelPorStream(memoryStream, ref transacaoDadosExcel, transacaoDadosExcelForm.NomeSheet);
+                _repositoryExcel.LerExcelPorStream(memoryStream, ref transacaoDadosExcel, transacaoDadosExcelForm.NomeSheet, 3);
 
-                transacaoDadosExcel.RemoveAll(x => string.IsNullOrEmpty(x.CCusto) || string.IsNullOrEmpty(x.TotalCliente));
+                transacaoDadosExcel.RemoveAll(x => string.IsNullOrEmpty(x.CCusto) || x.CCusto == "C.Custo");
+
+                if(transacaoDadosExcel.Count <= 0) throw new ArgumentException("Arquivo inválido.");
 
                 List<TransacaoDadosEntity> transacaoDados = new List<TransacaoDadosEntity>();
                 DateTime dataAtual = DateTime.Now;
@@ -62,7 +103,35 @@ namespace C1DOMAIN.Services
                         dataAtual,
                         transacaoDadosExcelForm.TransacaoId,
                         item.CCusto!,
-                        decimal.Parse(item.TotalCliente!)
+                        decimal.Parse(item.TotalCliente!),
+                        DateTime.Parse(item.NDataSolicitacao!),
+                        item.NSolicitante!,
+                        item.NAutorizacaoCartao!,
+                        item.NReserva!,
+                        item.NAprovador!,
+                        item.NMotivoDaViagem!,
+                        item.NPassageiro!,
+                        item.NProduto!,
+                        item.NDespesa!,
+                        item.NNomeFornecedor!,
+                        item.NLocalizador!,
+                        item.NBilhete!,
+                        item.NRotaCompleta!,
+                        item.NVeiculo!,
+                        item.NVoucher!,
+                        item.NApartamentos!,
+                        item.NRegime!,
+                        string.IsNullOrEmpty(item.NCheckIn) ? (DateTime?)null : DateTime.Parse(item.NCheckIn),
+                        string.IsNullOrEmpty(item.NCheckOut) ? (DateTime?)null : DateTime.Parse(item.NCheckOut),
+                        string.IsNullOrEmpty(item.NEmbarque) ? (DateTime?)null : DateTime.Parse(item.NEmbarque),
+                        string.IsNullOrEmpty(item.NQtDiarias) ? (int?)null : int.Parse(item.NQtDiarias),
+                        item.NFaturaNumero!,
+                        item.NNumeroCartao!,
+                        string.IsNullOrEmpty(item.NTarifaCliente) ? (decimal?)null : decimal.Parse(item.NTarifaCliente),
+                        string.IsNullOrEmpty(item.NTaxaDU) ? (decimal?)null : decimal.Parse(item.NTaxaDU),
+                        string.IsNullOrEmpty(item.NTaxasTotal) ? (decimal?)null : decimal.Parse(item.NTaxasTotal),
+                        string.IsNullOrEmpty(item.NTaxaEmbarque) ? (decimal?)null : decimal.Parse(item.NTaxaEmbarque),
+                        item.NObservacao!
                         )
                     {
                     });

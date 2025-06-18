@@ -45,7 +45,7 @@ const carregarTransacaoDados = (GuidId) => {
             let registros = document.getElementById('registrosDados');
             registros.innerHTML = '';
             if (responseData && responseData.ret) {
-                const transacao = responseData.transacao;
+                const transacao = responseData.transacao; console.log(transacao);
                 if (transacao && transacao.length > 0) {
                     let tabela = '';
                     tabela += `<table class="table table-bordered"><caption>Total: ${transacao.length}</caption>`;

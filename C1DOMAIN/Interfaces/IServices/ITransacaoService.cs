@@ -18,6 +18,7 @@ namespace C1DOMAIN.Interfaces.IServices
         #region Dados da Transação
 
         List<TransacaoDadosEntity> ListarTransacaoDados(Guid GuidId);
+        List<TransacaoDadosLiteEntity> ListarTransacaoDadosLite(Guid GuidId);
         void CriarLoteTransacaoDados(TransacaoDadosExcelFormEntity transacaoDadosExcelForm);
         void CriarTransacaoDados(TransacaoDadosEntity transacaoDados);
         TransacaoDadosEntity PegarTransacaoDadosPorGuidId(Guid GuidId);

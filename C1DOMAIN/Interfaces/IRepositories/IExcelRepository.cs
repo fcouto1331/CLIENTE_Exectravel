@@ -7,5 +7,7 @@ namespace C1DOMAIN.Interfaces.IRepositories
         void LerExcelPorStream(MemoryStream stream, ref List<TransacaoDadosExcelEntity> transacaoDadosExcel);
 
         void LerExcelPorStream(MemoryStream stream, ref List<TransacaoDadosExcelEntity> transacaoDadosExcel, string nomeSheet);
+
+        void LerExcelPorStream(MemoryStream stream, ref List<TransacaoDadosExcelEntity> transacaoDadosExcel, string nomeSheet, int numeroLinha);
     }
 }

@@ -160,6 +160,13 @@ namespace C4PRESENTATION_WEB.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GraficoDinamico(Guid TransacaoId)
+        {
+            ViewBag.GuidId = TransacaoId;
+            return View("GraficoDinamico");
+        }
+
         #endregion
 
     }

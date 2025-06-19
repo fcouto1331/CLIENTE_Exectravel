@@ -121,56 +121,9 @@ document.addEventListener('DOMContentLoaded', carregarGrafico);
 /*
 
 @*GRAFICO*@
+
 @* <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> *@
 @*<script src="~/js/chartjs-v4-4-9.js"></script>
-<canvas id="myChart"></canvas>
-<script>
-    const ctx = document.getElementById('myChart');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Julho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-        datasets: [{
-          label: 'Vendas',
-          data: [12, 19, 3, 5, 19, 25, 89, 92, 5, 1, 52],
-          backgroundColor: 'rgba(75, 192, 192, 0.2)'
-        }]
-      }
-    });
-</script>
-
-<div style="width: 50% !important;">
-    <canvas id="chartPizza"></canvas>
-</div>
-<script>
-    const ctxPizza = document.getElementById('chartPizza').getContext('2d');
-
-    new Chart(ctxPizza, {
-      type: 'pie',
-      data: {
-        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-        datasets: [{
-          label: 'Vendas',
-          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-          backgroundColor: [
-            'rgba(100, 100, 100, 0.6)',
-            'rgba(54, 162, 235, 0.6)',
-            'rgba(255, 206, 86, 0.6)',
-            'rgba(75, 192, 192, 0.6)',
-            'rgba(153, 102, 255, 0.6)',
-            'rgba(255, 159, 64, 0.6)',
-            'rgba(199, 199, 199, 0.6)',
-            'rgba(83, 102, 255, 0.6)',
-            'rgba(100, 255, 218, 0.6)',
-            'rgba(255, 99, 255, 0.6)',
-            'rgba(0, 200, 83, 0.6)',
-            'rgba(0, 150, 136, 0.6)'
-          ],
-          borderWidth: 1
-        }]
-      }
-    });
-</script>
 
 <canvas id="charBarHorizontal"></canvas>
 <script>

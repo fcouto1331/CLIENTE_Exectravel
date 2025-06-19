@@ -1,0 +1,141 @@
+﻿<script src="~/lib/bootstrap-multiselect/dist/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/bootstrap-multiselect.js"></script>
+<script src="~/lib/bootstrap-multiselect/dist/js/bootstrap.min.js"></script>
+<link href="~/css/bootstrap-multiselect.css" rel="stylesheet" />
+<link href="~/lib/bootstrap-multiselect/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<form id="frmGraficoDinamico">
+    <div class="card">
+        <div class="card-header bg-primary text-white">Formulário</div>
+        <div class="card-body">
+
+            @* <select id="meuSelect" multiple="multiple">
+                <option value="1">Opção 1</option>
+                <option value="2">Opção 2</option>
+            </select> *@
+
+            <div class="row">
+                <div class="col-4">
+                    <label for="NSolicitante" class="form-label">Solicitante</label>
+                    <select id="NSolicitante" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NAutorizacaoCartao" class="form-label">AutorizacaoCartao</label>
+                    <select id="NAutorizacaoCartao" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NReserva" class="form-label">Reserva</label>
+                    <select id="NReserva" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <label for="NAprovador" class="form-label">Aprovador</label>
+                    <select id="NAprovador" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NMotivoDaViagem" class="form-label">MotivoDaViagem</label>
+                    <select id="NMotivoDaViagem" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NPassageiro" class="form-label">Passageiro</label>
+                    <select id="NPassageiro" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                
+                <div class="col-4">
+                    <label for="NProduto" class="form-label">Produto</label>
+                    <select id="NProduto" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NDespesa" class="form-label">Despesa</label>
+                    <select id="NDespesa" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NNomeFornecedor" class="form-label">NomeFornecedor</label>
+                    <select id="NNomeFornecedor" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                
+                <div class="col-4">
+                    <label for="NLocalizador" class="form-label">Localizador</label>
+                    <select id="NLocalizador" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NBilhete" class="form-label">Bilhete</label>
+                    <select id="NBilhete" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NRotaCompleta" class="form-label">RotaCompleta</label>
+                    <select id="NRotaCompleta" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <label for="NVeiculo" class="form-label">Veiculo</label>
+                    <select id="NVeiculo" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NVoucher" class="form-label">Voucher</label>
+                    <select id="NVoucher" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NApartamentos" class="form-label">Apartamentos</label>
+                    <select id="NApartamentos" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <label for="NRegime" class="form-label">Regime</label>
+                    <select id="NRegime" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NQtDiarias" class="form-label">QtDiarias</label>
+                    <select id="NQtDiarias" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+                <div class="col-4">
+                    <label for="NFaturaNumero" class="form-label">FaturaNumero</label>
+                    <select id="NFaturaNumero" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <label for="NNumeroCartao" class="form-label">NumeroCartao</label>
+                    <select id="NNumeroCartao" class="form-select fcouto1331" multiple="multiple"></select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="FiltrarGraficoDinamico(event)">Gráfico</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-6">
+        <div style="width: 100% !important; margin: 50px auto;">
+            <canvas id="chartBarVertical"></canvas>
+        </div>
+    </div>
+    <div class="col-6">
+        <div style="width: 50% !important; margin: 50px auto;">
+            <canvas id="chartPie"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    const _transacaoId = "@ViewBag.GuidId";
+</script>
+
+<script src="~/js/chartjs-v4-4-9.js"></script>
+<script src="~/componentsjs/transacao/graficodinamico.js"></script>

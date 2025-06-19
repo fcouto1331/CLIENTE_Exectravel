@@ -43,7 +43,7 @@
                                 <button class="btn btn-danger btn-sm" onclick="deletar('${item.guidId}')" title='Deletar transação'>D</button>
                                 <button class="btn btn-warning btn-sm" onclick="showModalImportarDados('${item.id}')" title='Importação'>I</button>
                                 <button class="btn btn-info btn-sm" onclick="showModalListarDados('${item.guidId}')" title='Relatório'>R</button>
-                                <button class="btn btn-success btn-sm" onclick="window.open('/Transacao/Grafico?TransacaoId=${item.guidId}', '_blank')"  title='Gráfico'>G</button>
+                                <button class="btn btn-success btn-sm" onclick="window.open('/Transacao/GraficoDinamico?TransacaoId=${item.guidId}', '_blank')"  title='Gráfico'>G</button>
                             </td>
                         </tr>`;
                     });

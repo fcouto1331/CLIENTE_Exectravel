@@ -20,9 +20,11 @@ namespace C4PRESENTATION_WEB.Extensions
             services.AddScoped<ITransacaoRepository, TransacaoRepository>();
             services.AddScoped<ITransacaoService, TransacaoService>();
             services.AddScoped<ITransacaoApp, TransacaoApp>();
-
             services.AddScoped<IExcelRepository, ExcelRepository>();
             services.AddScoped<IColorService, ColorService>();
+            services.AddScoped<IBasePopulateRepository, BasePopulateRepository>();
+            services.AddScoped<IBasePopulateService, BasePopulateService>();
+            services.AddScoped<IBasePopulateApp, BasePopulateApp>();
         }
     }
 }

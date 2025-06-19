@@ -1,6 +1,7 @@
 ﻿using C1DOMAIN.Entities;
 using C3APPLICATION.DTOs;
 using Mapster;
+using System.Diagnostics;
 
 namespace C3APPLICATION.Mapster
 {
@@ -132,6 +133,20 @@ namespace C3APPLICATION.Mapster
                 });
             }
             return TransacaoDadosGraficoDTO;
+        }
+
+        #endregion
+
+        #region Basepopulate
+
+        public static List<BasePopulateEntity> ToListBasePopulateEntity(List<BasePopulateDTO> basePopulateDTO)
+        {
+            return basePopulateDTO.Adapt<List<BasePopulateEntity>>();
+        }
+
+        public static List<BasePopulateDTO> ToListBasePopulateDTO(List<BasePopulateEntity> basePopulateEntity)
+        {
+            return basePopulateEntity.Adapt<List<BasePopulateDTO>>();
         }
 
         #endregion

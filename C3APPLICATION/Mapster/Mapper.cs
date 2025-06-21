@@ -1,5 +1,6 @@
 ﻿using C1DOMAIN.Entities;
 using C3APPLICATION.DTOs;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Mapster;
 using System.Diagnostics;
 
@@ -135,6 +136,205 @@ namespace C3APPLICATION.Mapster
             return TransacaoDadosGraficoDTO;
         }
 
+        public static GraficoDinamicoFormEntity ToGraficoDinamicoFormEntity(GraficoDinamicoFormDTO graficoDinamicoFormDTO)
+        {
+            string nSolicitante = string.Empty;
+            if(graficoDinamicoFormDTO.NSolicitante?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NSolicitante)
+                {
+                    nSolicitante += item + ",";
+                }
+            }
+
+            string nAutorizacaoCartao = string.Empty;
+            if (graficoDinamicoFormDTO.NAutorizacaoCartao?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NAutorizacaoCartao)
+                {
+                    nAutorizacaoCartao += item + ",";
+                }
+            }
+
+            string nReserva = string.Empty;
+            if (graficoDinamicoFormDTO.NReserva?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NReserva)
+                {
+                    nReserva += item + ",";
+                }
+            }
+
+            string nAprovador = string.Empty;
+            if (graficoDinamicoFormDTO.NAprovador?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NAprovador)
+                {
+                    nAprovador += item + ",";
+                }
+            }
+
+            string nMotivoDaViagem = string.Empty;
+            if (graficoDinamicoFormDTO.NMotivoDaViagem?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NMotivoDaViagem)
+                {
+                    nMotivoDaViagem += item + ",";
+                }
+            }
+
+            string nPassageiro = string.Empty;
+            if (graficoDinamicoFormDTO.NPassageiro?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NPassageiro)
+                {
+                    nPassageiro += item + ",";
+                }
+            }
+
+            string nProduto = string.Empty;
+            if (graficoDinamicoFormDTO.NProduto?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NProduto)
+                {
+                    nProduto += item + ",";
+                }
+            }
+
+            string nDespesa = string.Empty;
+            if (graficoDinamicoFormDTO.NDespesa?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NDespesa)
+                {
+                    nDespesa += item + ",";
+                }
+            }
+
+            string nNomeFornecedor = string.Empty;
+            if (graficoDinamicoFormDTO.NNomeFornecedor?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NNomeFornecedor)
+                {
+                    nNomeFornecedor += item + ",";
+                }
+            }
+
+            string nLocalizador = string.Empty;
+            if (graficoDinamicoFormDTO.NLocalizador?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NLocalizador)
+                {
+                    nLocalizador += item + ",";
+                }
+            }
+
+            string nBilhete = string.Empty;
+            if (graficoDinamicoFormDTO.NBilhete?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NBilhete)
+                {
+                    nBilhete += item + ",";
+                }
+            }
+
+            string nRotaCompleta = string.Empty;
+            if (graficoDinamicoFormDTO.NRotaCompleta?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NRotaCompleta)
+                {
+                    nRotaCompleta += item + ",";
+                }
+            }
+
+            string nVeiculo = string.Empty;
+            if (graficoDinamicoFormDTO.NVeiculo?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NVeiculo)
+                {
+                    nVeiculo += item + ",";
+                }
+            }
+
+            string nVoucher = string.Empty;
+            if (graficoDinamicoFormDTO.NVoucher?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NVoucher)
+                {
+                    nVoucher += item + ",";
+                }
+            }
+
+            string nApartamentos = string.Empty;
+            if (graficoDinamicoFormDTO.NApartamentos?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NApartamentos)
+                {
+                    nApartamentos += item + ",";
+                }
+            }
+
+            string nRegime = string.Empty;
+            if (graficoDinamicoFormDTO.NRegime?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NRegime)
+                {
+                    nRegime += item + ",";
+                }
+            }
+
+            string nQtDiarias = string.Empty;
+            if (graficoDinamicoFormDTO.NQtDiarias?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NQtDiarias)
+                {
+                    nQtDiarias += item + ",";
+                }
+            }
+
+            string nFaturaNumero = string.Empty;
+            if (graficoDinamicoFormDTO.NFaturaNumero?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NFaturaNumero)
+                {
+                    nFaturaNumero += item + ",";
+                }
+            }
+
+            string nNumeroCartao = string.Empty;
+            if (graficoDinamicoFormDTO.NNumeroCartao?.Count > 0)
+            {
+                foreach (var item in graficoDinamicoFormDTO.NNumeroCartao)
+                {
+                    nNumeroCartao += item + ",";
+                }
+            }
+
+            GraficoDinamicoFormEntity graficoDinamicoFormEntity = new GraficoDinamicoFormEntity(        
+                graficoDinamicoFormDTO.GuidId,
+                nSolicitante.TrimEnd(',')!,
+                nAutorizacaoCartao.TrimEnd(',')!,
+                nReserva.TrimEnd(',')!,
+                nAprovador.TrimEnd(',')!,
+                nMotivoDaViagem.TrimEnd(',')!,
+                nPassageiro.TrimEnd(',')!,
+                nProduto.TrimEnd(',')!,
+                nDespesa.TrimEnd(',')!,
+                nNomeFornecedor.TrimEnd(',')!,
+                nLocalizador.TrimEnd(',')!,
+                nBilhete.TrimEnd(',')!,
+                nRotaCompleta.TrimEnd(',')!,
+                nVeiculo.TrimEnd(',')!,
+                nVoucher.TrimEnd(',')!,
+                nApartamentos.TrimEnd(',')!,
+                nRegime.TrimEnd(',')!,
+                nQtDiarias.TrimEnd(',')!,
+                nFaturaNumero.TrimEnd(',')!,
+                nNumeroCartao.TrimEnd(',')!
+                )
+            { };
+
+            return graficoDinamicoFormEntity;
+        }
         #endregion
 
         #region Basepopulate

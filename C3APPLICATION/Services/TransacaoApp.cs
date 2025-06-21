@@ -66,6 +66,8 @@ namespace C3APPLICATION.Services
 
         public List<TransacaoDadosGraficoDTO> ListarTransacaoDadosGrafico(Guid GuidId) => Mapper.ToListTransacaoDadosGraficoDTO(_service.ListarTransacaoDadosGrafico(GuidId));
 
+        public List<TransacaoDadosGraficoDTO> ListarTransacaoDadosGraficoDinamico(GraficoDinamicoFormDTO graficoDinamicoForm) => Mapper.ToListTransacaoDadosGraficoDTO(_service.ListarTransacaoDadosGraficoDinamico(Mapper.ToGraficoDinamicoFormEntity(graficoDinamicoForm)));
+
         #endregion
     }
 }

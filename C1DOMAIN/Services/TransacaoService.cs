@@ -178,6 +178,22 @@ namespace C1DOMAIN.Services
 
         }
 
+        public List<TransacaoDadosGraficoEntity> ListarTransacaoDadosGraficoDinamico(GraficoDinamicoFormEntity graficoDinamicoForm)
+        {
+            List<TransacaoDadosGraficoEntity> transacaoDadosGraficoEntity = _repository.ListarTransacaoDadosGraficoDinamico(graficoDinamicoForm);
+            if (transacaoDadosGraficoEntity.Count > 0)
+            {
+                foreach (var item in transacaoDadosGraficoEntity)
+                {
+                    if (item.Rgba.IsEmpty)
+                    {
+                        item.AlterarRgba(_serviceColor.PegarColor());
+                    }
+                }
+            }
+            return transacaoDadosGraficoEntity;
+        }
+
         #endregion
     }
 }

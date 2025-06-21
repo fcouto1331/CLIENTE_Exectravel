@@ -25,6 +25,7 @@ namespace C1DOMAIN.Interfaces.IRepositories
         void AtualizarTransacaoDados(TransacaoDadosEntity transacaoDados);
         void DeletarTransacaoDados(Guid GuidId);
         List<TransacaoDadosGraficoEntity> ListarTransacaoDadosGrafico(Guid GuidId);
+        List<TransacaoDadosGraficoEntity> ListarTransacaoDadosGraficoDinamico(GraficoDinamicoFormEntity graficoDinamicoForm);
 
         #endregion
     }

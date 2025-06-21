@@ -26,7 +26,7 @@ namespace C3APPLICATION.Interfaces
         void AtualizarTransacaoDados(TransacaoDadosDTO transacaoDados);
         void DeletarTransacaoDados(Guid GuidId);
         List<TransacaoDadosGraficoDTO> ListarTransacaoDadosGrafico(Guid GuidId);
-
+        List<TransacaoDadosGraficoDTO> ListarTransacaoDadosGraficoDinamico(GraficoDinamicoFormDTO graficoDinamicoForm);
 
         #endregion
     }

@@ -1,23 +1,4 @@
-﻿$(document).ready(function () {
-
-    //$('#meuSelect').multiselect(); // Quando o select for estático
-
-    $('.fcouto1331').multiselect({ // Bootstrap Multiselect Config
-        nonSelectedText: 'Selecione.',
-        buttonWidth: '100%', // largura do botão
-        maxHeight: 200, // altura máxima da lista dropdown
-        includeSelectAllOption: true,
-        selectAllText: 'Todos', // Check All
-        allSelectedText: 'Todos selecionados', // All Selected
-        nonSelectedText: 'Nenhum selecionado', // None selected
-        widthSynchronizationMode: 'always', // Limita o text a box
-    });
-
-    carregarPopulate();
-    
-});
-
-const carregarNSolicitante = () => {
+﻿const carregarNSolicitante = () => {
     fetch(`/BasePopulate/ListarNSolicitanteJson?GuidId=${encodeURIComponent(_transacaoId)}`, {
         method: 'GET',
         headers: {
@@ -647,14 +628,161 @@ const carregarPopulate = () => {
     carregarNNumeroCartao();
 }
 
+let chartBarVertical = null;
+let chartPizzaInstance = null;
+
+const ctxBarVertical = document.getElementById('chartBarVertical');
+const ctxPizza = document.getElementById('chartPizza').getContext('2d');
+
 const FiltrarGraficoDinamico = (event) => {
 
     event.preventDefault();
 
-    let _NSolicitante = $('#NSolicitante').val()
+    let _NSolicitante = $('#NSolicitante').val();
+    let _NAutorizacaoCartao = $('#NAutorizacaoCartao').val();
+    let _NNReserva = $('#NReserva').val();
+    let _NAprovador = $('#NAprovador').val();
+    let _NMotivoDaViagem = $('#NMotivoDaViagem').val();
+    let _NPassageiro = $('#NPassageiro').val();
+    let _NProduto = $('#NProduto').val();
+    let _NDespesa = $('#NDespesa').val();
+    let _NNomeFornecedor = $('#NNomeFornecedor').val();
+    let _NLocalizador = $('#NLocalizador').val();
+    let _NBilhete = $('#NBilhete').val();
+    let _NRotaCompleta = $('#NRotaCompleta').val();
+    let _NVeiculo = $('#NVeiculo').val();
+    let _NVoucher = $('#NVoucher').val();
+    let _NApartamentos = $('#NApartamentos').val();
+    let _NRegime = $('#NRegime').val();
+    let _NQtDiarias = $('#NQtDiarias').val();
+    let _NFaturaNumero = $('#NFaturaNumero').val();
+    let _NNumeroCartao = $('#NNumeroCartao').val();
 
-    console.log(`_NSolicitante: ${_NSolicitante}`);
+    let dados = {
+        GuidId: _transacaoId,
+        NSolicitante: _NSolicitante,
+        NAutorizacaoCartao: _NAutorizacaoCartao,
+        NReserva: _NNReserva,
+        NAprovador: _NAprovador,
+        NMotivoDaViagem: _NMotivoDaViagem,
+        NPassageiro: _NPassageiro,
+        NProduto: _NProduto,
+        NDespesa: _NDespesa,
+        NNomeFornecedor: _NNomeFornecedor,
+        NLocalizador: _NLocalizador,
+        NBilhete: _NBilhete,
+        NRotaCompleta: _NRotaCompleta,
+        NVeiculo: _NVeiculo,
+        NVoucher: _NVoucher,
+        NApartamentos: _NApartamentos,
+        NRegime: _NRegime,
+        NQtDiarias: _NQtDiarias, //_NQtDiarias ? parseInt(_NQtDiarias) : null,
+        NFaturaNumero: _NFaturaNumero,
+        NNumeroCartao: _NNumeroCartao
+    };
 
+    fetch('/Transacao/ListarGraficoDinamicoJson', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    })
+        .then(response => response.json())
+        .then(responseData => {
+            if (responseData && responseData.ret) {
+                const transacao = responseData.transacaoDados;
+                if (transacao && transacao.length > 0) {
+                    showChartBarVertical(transacao);
+                    showChartPie(transacao);
+                }
+                else {
+                    if (chartBarVertical) {
+                        chartBarVertical.destroy();
+                    }
+                    if (chartPizzaInstance) {
+                        chartPizzaInstance.destroy();
+                    }
+                    alert("Nenhum registro encontrado.");
+                }
+            }
+            else {
+                alert(`Erro response: ${responseData.msg}`);
+            }
+        })
+        .catch(error => {
+            alert(`Erro ${error}`);
+        })
+}
+
+const showChartBarVertical = (transacaoDados) => {
+    // Destroi gráfico anterior, se existir
+    if (chartBarVertical) {
+        chartBarVertical.destroy();
+    }
+    chartBarVertical = new Chart(ctxBarVertical, {
+        type: 'bar',
+        data: {
+            labels: transacaoDados.map(item => item.cCusto), 
+            datasets: [{
+                label: 'Centro de custo',
+                data: transacaoDados.map(item => item.totalCliente), 
+                backgroundColor: 'rgba(75, 192, 192, 0.2)'
+            }]
+        },
+        options: {
+            animation: {
+                duration: 5000,        
+                easing: 'easeOutQuart' 
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+const showChartPie = (transacaoDados) => {
+    if (chartPizzaInstance) {
+        chartPizzaInstance.destroy();
+    }
+    const cores = transacaoDados.map(item => `rgba(${parseInt(item.rgba.r)},${item.rgba.g},${item.rgba.b},0.6)`);
+    chartPizzaInstance = new Chart(ctxPizza, {
+        type: 'pie',
+        data: {
+            labels: transacaoDados.map(item => item.cCusto),
+            datasets: [{
+                label: 'Vendas',
+                data: transacaoDados.map(item => item.totalCliente),
+                backgroundColor: cores,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            animation: {
+                duration: 5000, 
+                easing: 'easeOutBounce' 
+            }
+        }
+    });
 }
 
 //document.addEventListener('DOMContentLoaded', carregarPopulate);
+
+document.addEventListener('DOMContentLoaded', function () {
+    $('.fcouto1331').multiselect({
+        nonSelectedText: 'Selecione.',
+        buttonWidth: '100%',
+        maxHeight: 200,
+        includeSelectAllOption: true,
+        selectAllText: 'Todos',
+        allSelectedText: 'Todos selecionados',
+        nonSelectedText: 'Nenhum selecionado',
+        widthSynchronizationMode: 'always',
+    });
+
+    carregarPopulate();
+});

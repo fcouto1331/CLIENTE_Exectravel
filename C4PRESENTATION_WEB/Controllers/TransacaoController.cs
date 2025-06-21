@@ -167,7 +167,21 @@ namespace C4PRESENTATION_WEB.Controllers
             return View("GraficoDinamico");
         }
 
+        [HttpPost]
+        public JsonResult ListarGraficoDinamicoJson([FromBody] GraficoDinamicoFormDTO graficoDinamicoFormDTO)
+        {
+            try
+            {
+                return Json(new { ret = true, msg = "Sucesso.", transacaoDados = _app.ListarTransacaoDadosGraficoDinamico(graficoDinamicoFormDTO) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { ret = false, msg = ex.Message });
+            }
+        }
+
         #endregion
 
     }
+
 }

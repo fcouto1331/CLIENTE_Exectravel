@@ -1,4 +1,8 @@
-﻿<script src="~/lib/bootstrap-multiselect/dist/js/jquery-3.6.0.min.js"></script>
+﻿@{
+    Layout = "/Views/Shared/_GraficoDinamico.cshtml";
+}
+
+<script src="~/lib/bootstrap-multiselect/dist/js/jquery-3.6.0.min.js"></script>
 <script src="~/js/bootstrap-multiselect.js"></script>
 <script src="~/lib/bootstrap-multiselect/dist/js/bootstrap.min.js"></script>
 <link href="~/css/bootstrap-multiselect.css" rel="stylesheet" />
@@ -114,7 +118,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="FiltrarGraficoDinamico(event)">Gráfico</button>
+                <button type="button" class="btn btn-primary" onclick="FiltrarGraficoDinamico(event)">Gerar gráfico</button>
             </div>
         </div>
     </div>
@@ -122,13 +126,13 @@
 
 <div class="row">
     <div class="col-6">
-        <div style="width: 100% !important; margin: 50px auto;">
+        <div style="width: 80% !important; margin: 50px auto;">
             <canvas id="chartBarVertical"></canvas>
         </div>
     </div>
     <div class="col-6">
-        <div style="width: 50% !important; margin: 50px auto;">
-            <canvas id="chartPie"></canvas>
+        <div style="width: 80% !important; margin: 50px auto;">
+            <canvas id="chartPizza"></canvas>
         </div>
     </div>
 </div>

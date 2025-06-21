@@ -3,6 +3,8 @@ using C1DOMAIN.Interfaces.IRepositories;
 using C2INFRA_SQL.Dapper;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Data;
 using System.Text;
 using Z.Dapper.Plus;
@@ -174,6 +176,236 @@ namespace C2INFRA_SQL.Repositories
                 query.Append(" declare @Id int = (select Id from Transacao where GuidId = @GuidId);");
                 query.Append(" SELECT CCusto, Sum(TotalCliente) as TotalCliente FROM TransacaoDados where TransacaoId = @Id group by CCusto;");
                 return [.. db.Query<TransacaoDadosGraficoEntity>(query.ToString(), new { GuidId = GuidId }, commandType: CommandType.Text)];
+            }
+        }
+
+        public List<TransacaoDadosGraficoEntity> ListarTransacaoDadosGraficoDinamico(GraficoDinamicoFormEntity graficoDinamicoForm)
+        {
+            using (var db = _context.DapperConexao())
+            {
+                db.Open();
+                StringBuilder query = new StringBuilder();
+                DynamicParameters parameters = new DynamicParameters();
+
+                query.Append(" SELECT CCusto, Sum(TotalCliente) as TotalCliente FROM TransacaoDados where TransacaoId = (select Id from Transacao where GuidId = @GuidID)");
+
+                parameters.Add("GuidID", graficoDinamicoForm.GuidId, DbType.Guid);
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NSolicitante))
+                {
+                    string[] nSolicitante = graficoDinamicoForm.NSolicitante
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NSolicitante in @NSolicitante");
+                    parameters.Add("NSolicitante", nSolicitante);
+                }  
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NAutorizacaoCartao))
+                {
+                    string[] nAutorizacaoCartao = graficoDinamicoForm.NAutorizacaoCartao
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NAutorizacaoCartao in @NAutorizacaoCartao");
+                    parameters.Add("NAutorizacaoCartao", nAutorizacaoCartao);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NReserva))
+                {
+                    string[] nReserva = graficoDinamicoForm.NReserva
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NReserva in @NReserva");
+                    parameters.Add("NReserva", nReserva);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NAprovador))
+                {
+                    string[] nAprovador = graficoDinamicoForm.NAprovador
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NAprovador in @NAprovador");
+                    parameters.Add("NAprovador", nAprovador);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NMotivoDaViagem))
+                {
+                    string[] nMotivoDaViagem = graficoDinamicoForm.NMotivoDaViagem
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NMotivoDaViagem in @NMotivoDaViagem");
+                    parameters.Add("NMotivoDaViagem", nMotivoDaViagem);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NPassageiro))
+                {
+                    string[] nPassageiro = graficoDinamicoForm.NPassageiro
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NPassageiro in @NPassageiro");
+                    parameters.Add("NPassageiro", nPassageiro);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NProduto))
+                {
+                    string[] nProduto = graficoDinamicoForm.NProduto
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NProduto in @NProduto");
+                    parameters.Add("NProduto", nProduto);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NDespesa))
+                {
+                    string[] nDespesa = graficoDinamicoForm.NDespesa
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NDespesa in @NDespesa");
+                    parameters.Add("NDespesa", nDespesa);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NNomeFornecedor))
+                {
+                    string[] nNomeFornecedor = graficoDinamicoForm.NNomeFornecedor
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NNomeFornecedor in @NNomeFornecedor");
+                    parameters.Add("NNomeFornecedor", nNomeFornecedor);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NLocalizador))
+                {
+                    string[] nLocalizador = graficoDinamicoForm.NLocalizador
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NLocalizador in @NLocalizador");
+                    parameters.Add("NLocalizador", nLocalizador);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NBilhete))
+                {
+                    string[] nNBilhete = graficoDinamicoForm.NBilhete
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NBilhete in @NBilhete");
+                    parameters.Add("NBilhete", nNBilhete);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NRotaCompleta))
+                {
+                    string[] nRotaCompleta = graficoDinamicoForm.NRotaCompleta
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NRotaCompleta in @NRotaCompleta");
+                    parameters.Add("NRotaCompleta", nRotaCompleta, DbType.String);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NVeiculo))
+                {
+                    string[] nVeiculo = graficoDinamicoForm.NVeiculo
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NVeiculo in @NVeiculo");
+                    parameters.Add("NVeiculo", nVeiculo);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NVoucher))
+                {
+                    string[] nVoucher = graficoDinamicoForm.NVoucher
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NVoucher in @NVoucher");
+                    parameters.Add("NVoucher", nVoucher);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NApartamentos))
+                {
+                    string[] nApartamentos = graficoDinamicoForm.NApartamentos
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NApartamentos in @NApartamentos");
+                    parameters.Add("NApartamentos", nApartamentos);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NRegime))
+                {
+                    string[] nRegime = graficoDinamicoForm.NRegime
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NRegime in @NRegime");
+                    parameters.Add("NRegime", nRegime);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NQtDiarias))
+                {
+                    // Converte a string "1,2,3" em um array de int
+                    int[] qtDiariasArray = graficoDinamicoForm.NQtDiarias
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => int.Parse(s.Trim()))
+                        .ToArray();
+
+                    // Adiciona o filtro na query
+                    query.Append(" and NQtDiarias in @NQtDiarias");
+
+                    // Passa o array como parâmetro para o Dapper
+                    parameters.Add("NQtDiarias", qtDiariasArray);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NFaturaNumero))
+                {
+                    string[] nFaturaNumero = graficoDinamicoForm.NFaturaNumero
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NFaturaNumero in @NFaturaNumero");
+                    parameters.Add("NFaturaNumero", nFaturaNumero);
+                }
+
+                if (!string.IsNullOrEmpty(graficoDinamicoForm.NNumeroCartao))
+                {
+                    string[] nNumeroCartao = graficoDinamicoForm.NNumeroCartao
+                        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => s.Trim())
+                        .ToArray();
+
+                    query.Append(" and NNumeroCartao in (@NNumeroCartao)");
+                    parameters.Add("NNumeroCartao", nNumeroCartao);
+                }
+
+                query.Append(" group by CCusto;");
+                return [.. db.Query<TransacaoDadosGraficoEntity>(query.ToString(), parameters, commandType: CommandType.Text)];
             }
         }
 
